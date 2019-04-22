@@ -1,0 +1,74 @@
+<template>
+  <view @tap="tap" class="home-btn" hover-class="button-hover" style="grid-column: span {{spanNo}}">
+    <text class="home-btn_icon {{icon}}"></text>
+    <text class="home-btn_title">{{title}}</text>
+  </view>
+</template>
+
+<style lang="scss">
+  @import "../../styles/base";
+  .home-btn {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: $white;
+    overflow: hidden;
+  }
+  .home-btn_selected {
+    background-color: #999999;
+  }
+
+
+  .home-btn_icon {
+    margin-top: 20rpx;
+    color: $main-blue;
+    font-size: 60rpx;
+  }
+
+  .home-btn_title {
+    color: $main-blue;
+    margin-top: 10rpx;
+    font-size: 28rpx;
+  }
+
+</style>
+
+<script>
+
+  import wepy from 'wepy'
+
+  export default class HomeCellStyle1 extends wepy.component {
+    // 对外暴露的属性
+    props = {
+      title: {
+        type: String,
+        default: '默认',
+        toWay: false
+      },
+      spanNo: {
+        type: Number,
+        default: 1,
+        toWay: false
+      },
+      icon: {
+        type: String,
+        default: 'icon-renmintiaojie1',
+        twoWay: false
+      },
+      index: {
+        type: Number,
+        default: 0,
+        toWay: true
+      }
+    }
+    methods = {
+      tap () {
+        // console.log('被点击了！')
+        // 传递事件
+        this.$emit('homeCellStyle1DidTap', this.index)
+      }
+    }
+  }
+
+  // 事件传递
+</script>

@@ -1,0 +1,33 @@
+<template>
+  <!--<web-view src="https://www.baidu.com/"></web-view>-->
+  <view class="container">
+    <!--<home-btn></home-btn>-->
+  </view>
+</template>
+
+<style lang="scss">
+
+  .container {
+    background-color: red;
+    display: flex;
+    justify-content: stretch;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+</style>
+
+
+<script>
+  import wepy from 'wepy'
+  import HomeBtn from './home/home-cell-style1.wpy'
+  export default class FuntionIntro extends wepy.page {
+    config = {
+      navigationBarTitleText: '功能介绍'
+    }
+
+    component = {
+      'home-btn': HomeBtn
+    }
+  }
+</script>

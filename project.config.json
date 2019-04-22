@@ -1,0 +1,13 @@
+{
+  "description": "练习",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+    "minified": false
+  },
+  "compileType": "miniprogram",
+  "appid": "wx326deb0e7306e2cd",
+  "projectname": "practice1",
+  "miniprogramRoot": "./dist"
+}

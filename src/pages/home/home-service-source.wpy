@@ -1,0 +1,59 @@
+<template>
+  <view class="home-service-source" @tap="tap">
+    <view class="home-service-source_title">{{title}}</view>
+    <view class="home-service-source_count">{{count}}</view>
+  </view>
+
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class HomeServiceSource extends wepy.component {
+    props = {
+      title: {
+        type: String,
+        default: '标题'
+      },
+      count: {
+        type: Number,
+        default: 0
+      },
+      index: {
+        type: Number,
+        default: 0
+      }
+    }
+    onLoad () {
+      console.log(this.count)
+    }
+    methods = {
+      tap () {
+        this.$emit('homeServiceSourceDidTap', this.index)
+      }
+    }
+  }
+
+</script>
+
+<style lang="scss">
+  @import "../../styles/base";
+
+  .home-service-source {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .home-service-source_title {
+    font-size: 30rpx;
+    color: $main-blue;
+  }
+
+  .home-service-source_count {
+    font-size: 28rpx;
+    color: orange;
+  }
+
+</style>

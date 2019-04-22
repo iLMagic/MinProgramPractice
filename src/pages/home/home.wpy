@@ -1,0 +1,391 @@
+<!--html-->
+<template>
+  <view class="container">
+    <view class ="banner" @tap="bannerTap">
+      <navigator class="bannerVideoBtn" url="funtionIntro" style="border-radius: {{btnCornerRadius}}rpx">功能介绍</navigator>
+      <image class="bannerImg" src="/images/banner.jpg" mode="widthFix">
+      </image>
+    </view>
+    <view class="userBar">
+      <view class="userBarElement">
+        <image class="userIcon" src="{{userIconUrl}}"></image>
+        <text class="userName">您好，{{nickName}}</text>
+      </view>
+      <view class="userBarElement">
+        <text class="goingEvent">正在进行{{eventCount}}</text>
+        <image class="arrowImg" src="/images/back.png"></image>
+      </view>
+    </view>
+    <navigator url="video" class="videoBar">
+      <image src="/images/propaganda.png" mode="widthFix"></image>
+    </navigator>
+    <service-content-header class="service-content-header"
+                            title="服务内容"
+                            :isShowDetail.sync="isShowCaseCountForServiceContent"
+                            :caseCount.sync="caseCount">
+    </service-content-header>
+    <view class="service-top">
+      <view class="silder">
+        <view class="name">咨询服务</view>
+        <view class="image icon icon-renmintiaojie1"></view>
+      </view>
+      <repeat for="{{serviceTopList}}" key="index" index="i" item="element">
+        <home-cell-style1
+          :spanNo.sync="element.span"
+          :title.sync="element.title"
+          :icon.sync="element.icon"
+          :index.sync="i">
+        </home-cell-style1>
+      </repeat>
+    </view>
+    <view class="service-bottom">
+      <repeat for="{{serviceBottomList}}" key="index" index="i" item="element">
+        <home-cell-style2
+          :title.sync="element.title"
+          :subTitle.sync="element.subTitle"
+          :icon.sync="element.icon"
+          :index.sync="i">
+        </home-cell-style2>
+      </repeat>
+    </view>
+    <view class="serivce-source">
+      <service-source-header class="service-source-header"
+                             title="服务资源"
+                             :isShowDetail.sync="isShowCaseCountForServiceSource">
+      </service-source-header>
+      <view class="serivce-source-content">
+        <repeat for="{{serviceSourceList}}" key="index" index="i" item="element">
+          <service-source-content :title.sync="element.title"
+                                  :count.sync="element.count"
+                                  :index.sync="i">
+          </service-source-content>
+        </repeat>
+      </view>
+    </view>
+  </view>
+</template>
+
+<!--js相关逻辑处理-->
+<script>
+  import wepy from 'wepy'
+  // 引入HomeBtn组件
+  import HomeCellStyle1 from './home-cell-style1'
+  import HomeCellStyle2 from './home-cell-style2'
+  import HomeSectionHeader from './home-section-header'
+  import HomeServiceSource from './home-service-source'
+
+  export default class Home extends wepy.page {
+    config = {
+      navigationBarTitleText: 'dhtest'
+    }
+    // 声明组件名称
+    components = {
+      'home-cell-style1': HomeCellStyle1,
+      'home-cell-style2': HomeCellStyle2,
+      'service-content-header': HomeSectionHeader,
+      'service-source-header': HomeSectionHeader,
+      'service-source-content': HomeServiceSource
+    }
+    data = {
+      btnCornerRadius: 0,
+      enterHeight: '100rpx',
+      userIconUrl: '',
+      // userName: '',
+      nickName: '',
+      eventCount: 0,
+      serviceTopList: [
+        {title: '智能咨询', span: 3, icon: 'icon icon-renmintiaojie1'},
+        {title: '人工咨询', span: 3, icon: 'icon icon-zhinengbanan-'},
+        {title: '法律知识', span: 2, icon: 'icon icon-bianji-copy-copy'},
+        {title: '相关案例', span: 2, icon: 'icon icon-bianji-copy-copy'},
+        {title: '解纷流程', span: 2, icon: 'icon icon-zhinengbanan-'}
+      ],
+      serviceBottomList: [
+        {title: '诉讼服务', subTitle: '获得更全面的详细的咨询报告服务服务1', icon: 'icon icon icon-renmintiaojie1'},
+        {title: '评估服务', subTitle: '获得更全面的详细的咨询报告服务服务2', icon: 'icon icon icon-renmintiaojie1'},
+        {title: '评估服务', subTitle: '获得更全面的详细的咨询报告服务服务3', icon: 'icon icon icon-renmintiaojie1'},
+        {title: '调解服务', subTitle: '获得更全面的详细的咨询报告服务服务4', icon: 'icon icon icon-renmintiaojie1'}
+      ],
+      serviceSourceList: [
+        {title: '咨询师', count: 0},
+        {title: '调解员', count: 0},
+        {title: '仲裁机构', count: 0},
+        {title: '法院', count: 0}
+      ],
+      caseCount: 0,
+      isShowCaseCountForServiceContent: true,
+      isShowCaseCountForServiceSource: false
+    }
+    events = {
+      // 服务模块中的咨询模块按钮的点击事件
+      'homeCellStyle1DidTap': (index, $event) => {
+        console.log(index)
+        switch (index) {
+          case 0: // 智能咨询
+            console.log(index)
+            break
+          case 1: // 人工咨询
+            console.log(index)
+            break
+          case 2: // 法律知识
+            console.log(index)
+            break
+          case 3: // 相关案例
+            console.log(index)
+            break
+          case 4: // 解纷流程
+            console.log(index)
+            break
+          default:
+            console.log('error')
+            break
+        }
+      },
+      'homeCellStyle2DidTap': (index, $event) => {
+        console.log('父控件' + index)
+        switch (index) {
+          case 0:
+            break
+          case 1:
+            break
+          case 2:
+            break
+          case 3:
+            break
+          default:
+            console.log('error')
+            break
+        }
+      },
+      // 资源模块按钮点击事件
+      'homeServiceSourceDidTap': (index, $event) => {
+        switch (index) {
+          case 0:
+            console.log('父控件' + index)
+            break
+          case 1:
+            console.log('父控件' + index)
+            break
+          case 2:
+            console.log('父控件' + index)
+            break
+          case 3:
+            console.log('父控件' + index)
+            break
+          default:
+            console.log('error')
+            break
+        }
+      }
+    }
+    methods = {
+      // test
+      bannerTap () {
+        this.caseCount = this.caseCount + 101
+      }
+    }
+    onLoad() {
+      var that = this
+      var query = wx.createSelectorQuery()
+      var element = query.select('.bannerVideoBtn')
+      element.boundingClientRect(function(rect) {
+        console.log(rect.height)
+        // 改变 enterMeetingCell的高度
+        that.btnCornerRadius = rect.height
+        that.enterHeight = '50vw'
+        that.$apply()
+        console.log(this.btnCornerRadius)
+      }).exec()
+      // 获取用户头像，
+      wx.getUserInfo({
+        success: function(res) {
+          console.log(res.userInfo.avatarUrl)
+          that.userIconUrl = res.userInfo.avatarUrl
+          that.nickName = res.userInfo.nickName
+          that.$apply()
+        }
+      })
+      this.testRequest()
+    }
+    testRequest() {
+      wepy.request({
+        relativeUrl: 'applet/index/countCMAC',
+        success: res => {
+          console.log(res)
+        },
+        fail: err => {
+          console.log(err)
+        }
+      })
+    }
+  }
+
+</script>
+
+
+<style lang="scss">
+  @import "../../styles/base";
+
+  .container {
+    background-color: rgb(248, 248, 248);
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .banner {
+    height: auto;
+  }
+
+  .bannerImg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .bannerVideoBtn {
+    position: absolute;
+    color: white;
+    top: 20rpx;
+    right:20rpx;
+    background-color: darkorange;
+    text-align: center;
+    font-size: 20rpx;
+    padding-left: 10rpx;
+    padding-right: 10rpx;
+    padding-top: 5rpx;
+    padding-bottom: 5rpx;
+  }
+
+
+  .userBar {
+    height: 88rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    background-color: white;
+    margin: -25rpx 30rpx 0rpx 30rpx; // 上 右下左
+    border-radius: 10rpx;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+    .userBarElement {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    .userIcon {
+      position: relative;
+      border-radius: 5rpx;
+      width: 60rpx;
+      height: 60rpx;
+      margin-left: 10rpx;
+    }
+
+    .userName {
+      position: relative;
+      color: #333;
+      font-size: 30rpx;
+      margin-left: 20rpx;
+    }
+    .goingEvent {
+      position: relative;
+      font-size: 30rpx;
+    }
+    .arrowImg {
+      position: relative;
+      width: 30rpx;
+      height: 30rpx;
+      /*margin-left: 10rpx;*/
+      padding-right: 10rpx;
+      /*margin-right: 10rpx;*/
+    }
+  }
+
+
+  .videoBar {
+    margin: 20rpx 30rpx 0rpx 30rpx;
+    height: auto;
+    image {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .service-content-header {
+    background-color: white;
+    height: 60rpx;
+    margin-top: 20rpx;
+  }
+
+  .service-top {
+    display: grid;
+    grid-template-columns: 180rpx repeat(6, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 1px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .15);
+    height: 320rpx;
+    margin: 10rpx 20rpx 10rpx 20rpx;
+    background-color: #999999;
+    overflow: hidden;
+    .silder {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      background-color: $main-blue;
+      grid-row: span 2;
+      .name {
+        color: $white;
+        font-size: 30rpx;
+        margin-top: 50rpx;
+      }
+      .image {
+        color: $white;
+        margin-top: 50rpx;
+        font-size: 140rpx;
+      }
+    }
+  }
+
+  .service-bottom {
+    display: grid;
+    background-color: white;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns:repeat(2, 1fr);
+    grid-gap: 20rpx;
+    height: 316rpx;
+    margin: 10rpx 20rpx 0rpx 20rpx;
+    box-sizing: border-box;
+  }
+
+
+  .serivce-source {
+    background-color: white;
+    /*height: 200rpx;*/
+    margin-top: 30rpx;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 200rpx;
+  }
+
+  .service-source-header {
+    background-color: white;
+    margin-top: 16rpx;
+  }
+
+  .serivce-source-content {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1px;
+    background-color: #999999;
+    height: 80rpx;
+    margin-top: 30rpx;
+    margin-left: 50rpx;
+    margin-right: 50rpx;
+    margin-bottom: 40rpx;
+  }
+
+</style>

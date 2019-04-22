@@ -1,0 +1,67 @@
+
+<style lang="scss">
+
+  @import 'images/iconfont';
+  @import "images/icon";
+  @import "styles/base";
+
+  /*对所有的container都生效*/
+  .container {}
+
+</style>
+
+<script>
+import wepy from 'wepy'
+import 'wepy-async-function'
+import requestInterceptor from './components/requestInterceptor'
+
+import { setStore } from 'wepy-redux'
+import configStore from './store'
+
+const store = configStore()
+setStore(store)
+
+export default class extends wepy.app {
+  config = {
+    // appid: 'wxfb3210c3d6871fb4',
+    pages: [
+      'pages/home/home'
+      // 'pages/funtionIntro',
+      // 'pages/video'
+    ],
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#fff',
+      navigationBarTitleText: 'WeChat',
+      navigationBarTextStyle: 'black'
+    }
+  }
+  globalData = {
+    userInfo: null
+  }
+
+  constructor () {
+    super()
+    this.use('requestfix')
+    this.use('promisify')
+    this.intercept('request', requestInterceptor)
+  }
+
+  onLaunch() {
+    this.testAsync()
+  }
+
+  sleep (s) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('promise resolved')
+      }, s * 1000)
+    })
+  }
+
+  async testAsync () {
+    const data = await this.sleep(3)
+    console.log(data)
+  }
+}
+</script>

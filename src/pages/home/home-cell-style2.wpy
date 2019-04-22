@@ -1,0 +1,87 @@
+<template>
+  <view class="home-cell-style2_container" @tap="tap">
+    <text class="home-cell-style2_icon {{icon}}"></text>
+    <view class="home-cell-style2_right">
+      <view class="home-cell-style2_title">{{title}}</view>
+      <view class="home-cell-style2_sub-title">{{subTitle}}</view>
+    </view>
+  </view>
+
+</template>
+
+<style lang="scss">
+  @import "../../styles/base";
+  .home-cell-style2_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .15);
+  }
+
+  .home-cell-style2_icon {
+    font-size: 70rpx;
+    color: $main-blue;
+    margin-left: 22rpx;
+  }
+
+  .home-cell-style2_right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: white;
+    margin-left: 20rpx;
+    overflow: hidden;
+  }
+
+  .home-cell-style2_title {
+    margin-top:10rpx;
+    font-size: 28rpx;
+    color: $main-blue;
+  }
+
+  .home-cell-style2_sub-title {
+    margin-top:5rpx;
+    font-size: 20rpx;
+    color: #999999;
+  }
+
+</style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class HomeCellStyle2 extends wepy.component {
+    props = {
+      icon: {
+        type: String,
+        default: '默认头像',
+        toWay: false
+      },
+      title: {
+        type: String,
+        default: '默认标题',
+        toWay: false
+      },
+      subTitle: {
+        type: String,
+        default: '默认副标题',
+        toWay: false
+      },
+      index: {
+        type: Number,
+        default: 0,
+        toWay: false
+      }
+    }
+    methods = {
+      tap () {
+        // console.log('memeda' + this.index)
+        // 传递方法
+        this.$emit('homeCellStyle2DidTap', this.index)
+      }
+    }
+  }
+</script>

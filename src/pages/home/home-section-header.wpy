@@ -1,0 +1,124 @@
+<template>
+  <view class="home-section-header">
+    <view class="home-section-header_left">
+      <view class="home-section-header_icon"></view>
+      <text class="home-section-header_title">{{title}}</text>
+    </view>
+    <view class="home-section-header_right" wx:if="{{isShowDetail}}">
+      <text>平台已调解</text>
+      <view class="home-section-header_count" wx:for="{{caseCountArray}}" wx:key="element">{{item}}</view>
+      <text>例</text>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class HomeSectionHeader extends wepy.component {
+    props = {
+      // 标题
+      title: String,
+      // 是否展示"案件数量view"
+      isShowDetail: {
+        type: Boolean,
+        default: true,
+        toWay: false
+      },
+      // 已调解案件数
+      caseCount: {
+        type: Number,
+        default: 0,
+        toWay: false
+      }
+    }
+    data = {
+      caseCountArray: []
+    }
+
+    watch = {
+      caseCount (newValue, oldValue) {
+        this.convertCaseCount()
+      }
+    }
+    onLoad () {
+      this.convertCaseCount()
+    }
+    // 将caseCount int 转变成字符串数组
+    convertCaseCount () {
+      let caseCountStr = String(this.caseCount)
+      console.log(caseCountStr)
+      let tempArray = []
+      for (let i = 0; i < caseCountStr.length; i++) {
+        let element = caseCountStr[i]
+        // 添加元素
+        tempArray.push(element)
+      }
+      this.caseCountArray = tempArray
+      this.$apply()
+    }
+  }
+</script>
+
+
+<style lang="scss">
+
+  .home-section-header {
+    /*background-color: white;*/
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .home-section-header_left {
+    display: flex;
+    align-items: center;
+    margin-left: 20rpx;
+  }
+
+  .home-section-header_icon {
+    display: flex;
+    align-items: center;
+    &::before, &::after {
+      height: 24rpx;
+      width: 6rpx;
+      content: '';
+      transform: rotate(15deg);
+      border-radius: 6rpx;
+    }
+    &::before {
+      background-color: #f49705;
+    }
+    &::after {
+      margin-left: 6rpx;
+      background-color: #255787;
+    }
+  }
+  .home-section-header_title {
+    font-size: 22rpx;
+    font-style: italic;
+    margin-left: 10rpx;
+  }
+
+
+  .home-section-header_right {
+    display: flex;
+    align-items: center;
+    margin-right: 20rpx;
+    text {
+      font-size: 22rpx;
+      color: orange;
+    }
+  }
+
+  .home-section-header_count {
+    width: 30rpx;
+    height: 40rpx;
+    text-align: center;
+    font-size: 24rpx;
+    line-height: 40rpx;
+    background-color: orange;
+    color: white;
+    margin-right: 5rpx;
+    margin-left: 5rpx;
+  }
+
+</style>
