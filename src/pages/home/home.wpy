@@ -73,6 +73,8 @@
   import HomeCellStyle2 from './home-cell-style2'
   import HomeSectionHeader from './home-section-header'
   import HomeServiceSource from './home-service-source'
+  import {RequestConfig} from '../../components/request'
+  // import * as Request1 from '../../components/request1'
 
   export default class Home extends wepy.page {
     config = {
@@ -205,9 +207,14 @@
           that.$apply()
         }
       })
-      this.testRequest()
+      // this.testRequest()
+      this.testPromise()
+      // this.testPost()
     }
     testRequest() {
+      // wepy.request({
+      //
+      // })
       wepy.request({
         relativeUrl: 'applet/index/countCMAC',
         success: res => {
@@ -217,6 +224,46 @@
           console.log(err)
         }
       })
+    }
+    testPromise() {
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // resolve('resolve')
+          // error: reject需要返回一个error对象
+          // reject('reject')
+          reject(new Error('reject'))
+        }, 1000)
+      }).then((r) => {
+        console.log('then' + r)
+      }).catch((r) => {
+        console.log('catch' + r)
+      })
+    }
+    testPost() {
+      let config = new RequestConfig()
+      config.header = {'token1': 'qqweqe'}
+      // config.customHeader = config.header
+      console.log(config)
+      // Request.post()
+      // Request1.post()
+      // let s = new Student('xiaoming')
+      // s.hello()
+      // let re = new Request()
+      // re.post()
+
+      // let request = new Request()
+      // request.post()
+
+      // function handler() {
+      //   console.log('handler处理')
+      // }
+      // function f1(handler) {
+      //   handler()
+      // }
+      // f1(
+      //   handler => {
+      //     console.log('handler处理')
+      //   })
     }
   }
 
