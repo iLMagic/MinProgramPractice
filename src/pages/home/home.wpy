@@ -73,7 +73,7 @@
   import HomeCellStyle2 from './home-cell-style2'
   import HomeSectionHeader from './home-section-header'
   import HomeServiceSource from './home-service-source'
-  import {RequestConfig} from '../../components/request'
+  import {request} from '../../components/request'
   // import * as Request1 from '../../components/request1'
 
   export default class Home extends wepy.page {
@@ -207,64 +207,164 @@
           that.$apply()
         }
       })
-      // this.testRequest()
-      this.testPromise()
+      // this.testPromise()
       // this.testPost()
+      // let name = 'hedahai'
+      // let dic = {name}
+      // console.log(dic)
+      this.testRequest()
+      // this.testErrowFunction()
     }
     testRequest() {
-      // wepy.request({
-      //
-      // })
-      wepy.request({
-        relativeUrl: 'applet/index/countCMAC',
-        success: res => {
-          console.log(res)
-        },
-        fail: err => {
-          console.log(err)
-        }
-      })
+      // await async
+      let resul1 = request('applet/index/countCMAC')
+      console.log('result1 + %o', resul1)
+      let resul2 = request('applet/index/countCMAC')
+      console.log('result2 + %o', resul2)
+      let resul3 = request('applet/index/countCMAC')
+      console.log('result3 + %o', resul3)
+      console.log('memeda0')
+      console.log('memeda1')
+      console.log('memeda2')
+      console.log('memeda3')
+      console.log('memeda4')
     }
-    testPromise() {
-      new Promise((resolve, reject) => {
-        setTimeout(() => {
-          // resolve('resolve')
-          // error: reject需要返回一个error对象
-          // reject('reject')
-          reject(new Error('reject'))
-        }, 1000)
-      }).then((r) => {
-        console.log('then' + r)
-      }).catch((r) => {
-        console.log('catch' + r)
-      })
-    }
-    testPost() {
-      let config = new RequestConfig()
-      config.header = {'token1': 'qqweqe'}
-      // config.customHeader = config.header
-      console.log(config)
-      // Request.post()
-      // Request1.post()
-      // let s = new Student('xiaoming')
-      // s.hello()
-      // let re = new Request()
-      // re.post()
-
-      // let request = new Request()
-      // request.post()
-
-      // function handler() {
-      //   console.log('handler处理')
-      // }
-      // function f1(handler) {
-      //   handler()
-      // }
-      // f1(
-      //   handler => {
-      //     console.log('handler处理')
-      //   })
-    }
+    // testPromise() {
+    //   new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       // resolve('resolve')
+    //       // error: reject需要返回一个error对象
+    //       // reject('reject')
+    //       reject(new Error('reject'))
+    //     }, 1000)
+    //   }).then((r) => {
+    //     console.log('then' + r)
+    //   }).catch((r) => {
+    //     console.log('catch' + r)
+    //   })
+    // }
+    // testPost() {
+    //   let config = new RequestConfig()
+    //   config.header = {'token1': 'qqweqe'}
+    //   // config.customHeader = config.header
+    //   console.log(config)
+    //   // Request.post()
+    //   // Request1.post()
+    //   // let s = new Student('xiaoming')
+    //   // s.hello()
+    //   // let re = new Request()
+    //   // re.post()
+    //
+    //   // let request = new Request()
+    //   // request.post()
+    //
+    //   // function handler() {
+    //   //   console.log('handler处理')
+    //   // }
+    //   // function f1(handler) {
+    //   //   handler()
+    //   // }
+    //   // f1(
+    //   //   handler => {
+    //   //     console.log('handler处理')
+    //   //   })
+    // }
+    // testErrowFunction() {
+    //   // let arrowFunction = () => {
+    //   //   // console.log('输出' + arguments.x)
+    //   //   console.log('参数的个数' + arguments.length)
+    //   //   for (let i = 0; i < arguments.length; i++) {
+    //   //     console.log('arg ' + i + '=' + arguments[i]) // 10, 20, 30
+    //   //   }
+    //   //   // for (let element of arguments) {
+    //   //   //   console.log(element)
+    //   //   // }
+    //   //   return arguments
+    //   // }
+    //   // arrowFunction('么么哒')
+    //   // console.log(result)
+    //   // let req = (opts = {}) => {
+    //   //   let {
+    //   //     url = '',
+    //   //     data = {},
+    //   //   } = opts
+    //   //   if (typeof (opts.url) !== 'string') {
+    //   //     throw new Error('The arguments for url must be string type')
+    //   //   }
+    //   //   // data为非必传参数
+    //   //   if (opts.data) {
+    //   //     if (typeof (opts.data) !== 'object') {
+    //   //       throw new Error('The arguments for data must be object type')
+    //   //     }
+    //   //   }
+    //   //   // if (typeof (opts))
+    //   //   // if (typeof opts.data === '')
+    //   //   // console.log('url:' + url)
+    //   //   // console.log('data:' + opts.data)
+    //   //   // success 为函数
+    //   //   // fail为函数
+    //   // }
+    //   // req({
+    //   //   url: 'https://api',
+    //   //   data: {'token': 'qweqeqe', 'caseId': 111222}
+    //   //
+    //   // })
+    //   // let f1 = async () => {
+    //   //   return new Error('memeda')
+    //   // }
+    //   // f1().then((r) => {
+    //   //   console.log(r)
+    //   // })
+    //   let getTest1 = () => {
+    //     console.log('test1 is running')
+    //     return new Promise((resolve, reject) => {
+    //       setTimeout(() => {
+    //         console.log('test1 promise running')
+    //         resolve(1)
+    //       }, 2 * 1000)
+    //     })
+    //   }
+    //
+    //   let getTest2 = () => {
+    //     console.log('test2 is running')
+    //     return new Promise((resolve, reject) => {
+    //       setTimeout(() => {
+    //         console.log('test2 promise running')
+    //         resolve(2)
+    //       }, 2 * 1000)
+    //     })
+    //   }
+    //
+    //   let getTest3 = () => {
+    //     console.log('test3 is running')
+    //     return new Promise((resolve, reject) => {
+    //       setTimeout(() => {
+    //         console.log('test3 promise running')
+    //         resolve(3)
+    //       }, 2 * 1000)
+    //     })
+    //   }
+    //
+    //   async function test() {
+    //    // const g1 = await getTest1()
+    //    // const g2 = await getTest2()
+    //    // const g3 = await getTest3()
+    //     await setTimeout(() => {
+    //       console.log('one')
+    //     }, 2 * 1000)
+    //     await setTimeout(() => {
+    //       console.log('two')
+    //     }, 2 * 1000)
+    //     let ww = () => {
+    //       return new Promise((resolve, reject) => {
+    //         console.log('three')
+    //       })
+    //     }
+    //     await ww()
+    //   }
+    //
+    //   test()
+    // }
   }
 
 </script>

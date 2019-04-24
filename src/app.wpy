@@ -13,7 +13,7 @@
 <script>
 import wepy from 'wepy'
 import 'wepy-async-function'
-import requestInterceptor from './components/requestInterceptor'
+// import requestInterceptor from './components/requestInterceptor'
 
 import { setStore } from 'wepy-redux'
 import configStore from './store'
@@ -44,24 +44,24 @@ export default class extends wepy.app {
     super()
     this.use('requestfix')
     this.use('promisify')
-    this.intercept('request', requestInterceptor)
+    // this.intercept('request', requestInterceptor)
   }
 
   onLaunch() {
-    this.testAsync()
+    // this.testAsync()
   }
 
-  sleep (s) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve('promise resolved')
-      }, s * 1000)
-    })
-  }
+  // sleep (s) {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve('promise resolved')
+  //     }, s * 1000)
+  //   })
+  // }
 
-  async testAsync () {
-    const data = await this.sleep(3)
-    console.log(data)
-  }
+  // async testAsync () {
+  //   const data = await this.sleep(3)
+  //   console.log(data)
+  // }
 }
 </script>

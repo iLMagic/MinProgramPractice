@@ -1,75 +1,48 @@
 
 import wepy from 'wepy'
+import {DOMAIN} from '../components/contants'
 
-export class RequestConfig {
-  constructor() {
-    this.header = {'token': 'asdjadkaldjakldjaw'}
-    // this.header =
-    console.log(this.header)
+export async function request(url, params) {
+  if (!url) {
+    throw new Error('The argument for url is nil or undefined')
   }
-  // // 自定义请求头
-  // setCustomHeader() {
-  //
+  if (typeof url !== 'string') {
+    throw new Error('The argument for url is must be string type')
+  }
+  if (params) {
+    if (typeof params !== 'object') {
+      throw new Error('The argument for params is must be object type')
+    }
+  }
+  url = DOMAIN.concat(url)
+  let data = {}
+  if (params) {
+    data = params
+  }
+
+   let promis = wepy.request({
+        url,
+        data,
+        method: 'post'
+      })
+
+  return promis
+  // var innerRequest = function() {
+  //   return new Promise((resolve, reject) => {
+  //     wepy.request({
+  //       url,
+  //       data,
+  //       method: 'post'
+  //     }).then((r) => {
+  //       // console.log(r)
+  //       resolve(r.data)
+  //     }).catch((e) => {
+  //       // console.log(e)
+  //       reject(e)
+  //     })
+  //   })
   // }
-
-  post() {
-    console.log('post is running')
-  }
+  // let result = await innerRequest()
+  // return result
 }
 
-
-// export function post(url, configHandler) {
-//   // console.log('post is running')
-//   // let promise = new Promise((resolve, reject) => {
-//   //   setTimeout()
-//   // })
-//   let config = new RequestConfig()
-//
-//    configHandler()
-//   wepy.request({
-//     url:
-//   })
-// }
-
-
-// 创建一个类
-// export class Student {
-//   constructor(name) {
-//     this.name = name
-//   }
-//   hello() {
-//     // alert(')
-//     console.log('Hello, ' + this.name + '!')
-//   }
-// }
-
-// var requestConfigModel = {
-//   domain: '',
-//   api: '',
-//   token: ''
-// }
-//
-// export function POST(url, configHandler) {
-//   wepy.request({
-//     url: url
-//   })
-// }
-//
-// // var request = new Object({
-// //
-// //   POST: function() {
-// //     console.log('post is running')
-// //   }
-// // })
-// // // export module1
-// //
-// // module.exports(request)
-//
-// // export default module Request1 {
-// //   POST() {
-// //     console.log('post is running')
-// //   }
-// // }
-
-
-// export default request
